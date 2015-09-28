@@ -1,5 +1,8 @@
 package vending2;
-
+/**
+ * Elohe Yonas
+ * Assignment2
+ */
 import javafx.stage.Stage;
 
 public class Driver {
