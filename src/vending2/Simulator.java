@@ -1,12 +1,13 @@
 package vending2;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import com.sun.corba.se.impl.orbutil.ObjectWriter;
-public class Simulator implements Serializable{
+public class Simulator{
 	public void Simulate() throws EmptyListException{
 		 FoodItemLinkedList<FoodItem> meat = new FoodItemLinkedList<FoodItem>();
 		 FoodItemLinkedList<FoodItem> fruit = new FoodItemLinkedList<FoodItem>();
@@ -30,9 +31,17 @@ public class Simulator implements Serializable{
 		 	pork.obtainFoodInfo(4, "pork", "it's good", "small", "no salt");
 		 	meat.Add(chicken);
 		 	chicken.obtainFoodInfo(4, "chicken", "not the nugget", "Large", "not fried");
-		 	//meat.delete("chicken");
 		 	
-		 	System.out.println("did it work?");
+		 	System.out.println("before the delete");
+		 	System.out.println(meat.toString());
+		 	
+		 	
+		 	meat.delete();
+
+	
+		 	
+		 	
+		 	System.out.println("After Delete");
 		 	
 		 	System.out.println(meat.toString());
 		 	if(meat.isEmpty()){
@@ -57,26 +66,32 @@ public class Simulator implements Serializable{
 		 	
 		 	//now to test out categories
 		 	CategoryList<FoodItemLinkedList<FoodItem>> categories = new CategoryList<FoodItemLinkedList<FoodItem>>();
-		 	categories.Add(fruit);
-		 	fruit.setName("Fruits");
-		 	categories.Add(meat);
-		 	fruit.setName("Meats");
+		 	categories.Add(fruit,"fruits");
+		 
+		 	categories.Add(meat,"meats");
+		
 		 	System.out.println(categories.toString());
 		 	/**
 		 	 * now to save the items
 		 	 */
-		 	/**String filename = "Vending2";
-		 	ObjWriter<CategoryList<FoodItemLinkedList<FoodItem>>> objwriter = new ObjWriter<CategoryList<FoodItemLinkedList<FoodItem>>>(categories,filename);
-		 	try{
-		 		objwriter.writeObjFile();
-		 	}
-		 	catch(FileNotFoundException e){
-		 		e.printStackTrace();
-		 	}
-		 	catch(IOException e){
-		 		e.printStackTrace();
-		 	} 
-		 	**/
+		 	String filename = "CategoryList";
+		 	try {
+	       
+	            byte[] buffer = categories.toString().getBytes();
+
+	            FileOutputStream outputStream =
+	                new FileOutputStream(filename);
+	            outputStream.write(buffer);
+	            outputStream.close();       
+	            System.out.println("Wrote " + buffer.length + 
+	                " bytes");
+	        }
+	        catch(IOException ex) {
+	            System.out.println(
+	                "Error writing file '"
+	                + filename + "'");
+	        }
+		 	
 		 	
 	}
 }

@@ -33,14 +33,16 @@ public class CategoryList<T> {
 	 * adds a categoryNode to the Category Linked List
 	 * @param fooditem
 	 */
-	public void Add(FoodItemLinkedList<FoodItem> fooditem){
-		CategoryNode<FoodItemLinkedList<FoodItem>> Cat = new CategoryNode<FoodItemLinkedList<FoodItem>>(fooditem);
+	public void Add(FoodItemLinkedList<FoodItem> fooditem,String name){
+		CategoryNode<FoodItemLinkedList<FoodItem>> Cat = new CategoryNode<FoodItemLinkedList<FoodItem>>(fooditem,name);
 		
 		if(isEmpty()){
 			this.head = Cat;
 		}
 		else{
-				
+			while(Cat.getCatpointer()!= null){
+				 Cat = Cat.getCatpointer();
+					}	
 			this.tail.setCatpointer(Cat);
 			}
 		tail = Cat;
@@ -71,15 +73,20 @@ public FoodItemLinkedList<FoodItem> search(String item) throws EmptyListExceptio
 	}
 	return storage;
 }
+/**
+ * to string of the list of categories
+ */
 public String toString(){
 	CategoryNode<FoodItemLinkedList<FoodItem>> Cat = this.head;
 	String records = "";
 	while(Cat!=null){
-		if(Cat!=null){
-	records += Cat.foodlink.getName() + ", ";
+	
+	records += Cat.getName() + "\n" + Cat.foodlink.toString();
 	Cat = Cat.getCatpointer();
-		};
+		
 	}
 	return records;
 }
+
+
 }

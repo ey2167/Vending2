@@ -15,6 +15,8 @@ public T getFoodlink() {
 
 public void setFoodlink(T foodlink) {
 	this.foodlink = foodlink;
+	this.catpointer = null;
+	
 }
 
 
@@ -40,8 +42,10 @@ public void setCatpointer(CategoryNode<T> catpointer) {
  */
 CategoryNode(){
 }
-CategoryNode(T foodlink){
+CategoryNode(T foodlink,String name){
 	this.foodlink = (T) foodlink;
+	this.name = name;
+	this.catpointer = null;
 	
 }
 CategoryNode(T foodlink, CategoryNode<T> catnode){

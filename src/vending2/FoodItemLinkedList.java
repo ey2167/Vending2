@@ -16,44 +16,46 @@ public void Add(FoodItem fooditem){
 	
 	FoodItemNode<FoodItem> Food = new FoodItemNode<FoodItem>(fooditem);
 	
-	
 	if(isEmpty()){
 		this.head = Food;
 	}
 	else{
 			
-		this.tail.setPointer(Food);
-		}
-	tail = Food;
+			while(Food.getPointer()!= null){
+		 Food = Food.getPointer();
+			}
+			this.tail.setPointer(Food);
+			
+	}
+	this.tail = Food;
 }
 /**
  * removes a node from the fooditemlist
  */
-public FoodItem delete(String name) throws EmptyListException{
+
+//work on this...and binary....and javafx....
+public void delete() throws EmptyListException{
 	FoodItemNode<FoodItem> search = head;
-	head = search;
-	String item = "";
-	FoodItem delete = null;
+	FoodItemNode<FoodItem> prev = search;
 	
 	if(isEmpty()){
 		throw new EmptyListException("there is nothing to remove");
 	}
 	else{
 		
-		while(search!= null && !(item.equals(name))){
-			item = search.fooddata.name;
-			if(item.equals(name)){
-				search.fooddata = delete;
-				
-				this.tail = search.getPointer();
-			}
-			else{
-				search = search.getPointer();
-				
-			}
+		while(search.getPointer()!= null){
+			prev = search;
+			search = search.getPointer();
 		}
+	
+		search.fooddata = null;
+		search.pointer = null;
+		this.tail = prev;
+		
+		
 	}
-	return search.fooddata;
+	//return search.getFooddata();
+
 }
 
 
@@ -88,9 +90,11 @@ public FoodItem search(String item) throws EmptyListException{
 public String toString(){
 	FoodItemNode<FoodItem> Food = this.head;
 	String records = "";
-	while(Food!=null){
+	while(Food!=null && Food.fooddata != null){
 	records += Food.getFooddata().DisplayFoodInfo();
+	
 	Food = Food.getPointer();
+	
 	}
 	return records;
 }

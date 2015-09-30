@@ -13,11 +13,15 @@ public T getFooddata() {
  * constructors
  * 
  */
+public FoodItemNode(){
+	
+}
 public FoodItemNode(T fooddata){
 	this.fooddata = (T) fooddata;
-	pointer = null;
+	//FoodItemNode<T> pointer= new FoodItemNode<T>();
+	this.pointer = null;
+	
 }
-
 public FoodItemNode(T fooddata, FoodItemNode<T> pointer){
 	this.fooddata = (T) fooddata;
 	this.pointer = pointer;
