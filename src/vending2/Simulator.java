@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Random;
 
 import com.sun.corba.se.impl.orbutil.ObjectWriter;
 public class Simulator{
@@ -18,6 +19,7 @@ public class Simulator{
 		 FoodItem tomato = new FoodItem();
 		 FoodItem apple = new FoodItem();
 		 FoodItem orange = new FoodItem();
+		 meat.delete();
 		 if(meat.isEmpty()){
 			 System.out.println("list is empty");
 		 }
@@ -31,16 +33,9 @@ public class Simulator{
 		 	pork.obtainFoodInfo(4, "pork", "it's good", "small", "no salt");
 		 	meat.Add(chicken);
 		 	chicken.obtainFoodInfo(4, "chicken", "not the nugget", "Large", "not fried");
-		 	
 		 	System.out.println("before the delete");
 		 	System.out.println(meat.toString());
-		 	
-		 	
 		 	meat.delete();
-
-	
-		 	
-		 	
 		 	System.out.println("After Delete");
 		 	
 		 	System.out.println(meat.toString());
@@ -71,6 +66,10 @@ public class Simulator{
 		 	categories.Add(meat,"meats");
 		
 		 	System.out.println(categories.toString());
+		 	System.out.println("searching for fruits");
+		 	
+		 	System.out.println();
+		 	System.out.println(categories.search("fruits"));
 		 	/**
 		 	 * now to save the items
 		 	 */
@@ -94,4 +93,48 @@ public class Simulator{
 		 	
 		 	
 	}
+		
+	/*
+	 * now for test classes 
+	 */
+	//change name to reflect that linked list is generic
+	public<T> void addTest(FoodItemLinkedList<T> myList){
+		FoodItem food = new FoodItem();
+		food.obtainFoodInfo(Math.random(), String.valueOf(Math.random()),String.valueOf(Math.random()),String.valueOf(Math.random()),String.valueOf(Math.random()));
+		myList.Add(food);
+		System.out.println(myList.toString());
+	}
+	public<T> void deleteTest(FoodItemLinkedList<T> myList){
+		try {
+			myList.delete();
+		} catch (EmptyListException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(myList.toString());
+	}
+	public<T> void stringTest(FoodItemLinkedList<T> myList){
+		System.out.println(myList.toString());
+	}
+	//testing simulator
+	public void Test(){
+	FoodItemLinkedList<FoodItem> myList= new FoodItemLinkedList<FoodItem>();
+	for(int i = 0; i<4; i++){
+		System.out.println("times added: " + (i+1));
+		System.out.println();
+		addTest(myList);
+	}
+	System.out.println("now to Delete");
+	System.out.println();
+	deleteTest(myList);
+	
+	System.out.println("now for stringtest");
+	System.out.println();
+	stringTest(myList);
+	
+	
+	}
+	
+	
+	
 }

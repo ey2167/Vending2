@@ -23,10 +23,13 @@ public void Add(FoodItem fooditem){
 			
 			while(Food.getPointer()!= null){
 		 Food = Food.getPointer();
+		 System.out.println("test");
 			}
+	
 			this.tail.setPointer(Food);
 			
 	}
+	System.out.println("testing");
 	this.tail = Food;
 }
 /**
@@ -37,12 +40,10 @@ public void Add(FoodItem fooditem){
 public void delete() throws EmptyListException{
 	FoodItemNode<FoodItem> search = head;
 	FoodItemNode<FoodItem> prev = search;
-	
-	if(isEmpty()){
-		throw new EmptyListException("there is nothing to remove");
-	}
-	else{
-		
+	try{
+		if(isEmpty()){
+			throw new EmptyListException("there is nothing to remove");
+		}
 		while(search.getPointer()!= null){
 			prev = search;
 			search = search.getPointer();
@@ -53,8 +54,10 @@ public void delete() throws EmptyListException{
 		this.tail = prev;
 		
 		
-	}
-	//return search.getFooddata();
+	}catch(EmptyListException e)
+	{
+		e.getMessage();
+		}
 
 }
 
